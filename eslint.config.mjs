@@ -1,13 +1,26 @@
-import js from '@eslint/js'
+import pluginJs from '@eslint/js'
 import globals from 'globals'
 import { defineConfig } from 'eslint/config'
 import stylistic from '@stylistic/eslint-plugin'
 
 export default defineConfig([
   stylistic.configs.recommended,
-  { files: ['**/*.{js,mjs,cjs}'], plugins: { js }, extends: ['js/recommended'] },
-  { files: ['**/*.{js,mjs,cjs}'], languageOptions: { globals: globals.node, parserOptions: {
-    projectService: true,
-    tsconfigRootDir: import.meta.dirname,
-  } } },
+  pluginJs.configs.recommended,
+  {
+    files: [
+      '**/*.{js,ts,tsx}',
+    ],
+  },
+  {
+    ignores: ['dist/'],
+  },
+  {
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
 ])
