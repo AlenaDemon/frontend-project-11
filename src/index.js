@@ -1,1 +1,2 @@
-console.log('Hello!')
+import './styles.scss'
+import 'bootstrap'

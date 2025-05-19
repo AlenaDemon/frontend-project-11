@@ -41,6 +41,9 @@ export default {
     new HtmlWebpackPlugin({
       template: 'index.html',
     }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
   ],
   output: {
     clean: true,
