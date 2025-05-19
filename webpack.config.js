@@ -1,8 +1,11 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-module.exports = {
-  mode: process.env.NODE_ENV || 'development',
+export default {
+  mode: 'development',
   devServer: {
+    open: true,
+    host: 'localhost',
     client: {
       overlay: false,
     },
@@ -19,18 +22,18 @@ module.exports = {
           },
         },
       },
-      { test: /\.css$/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
+      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'] },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
       },
       {
         test: /\.woff2?(\?v=\d\.\d\.\d)?$/,
-        use: 'url-loader?limit=10000',
+        use: 'asset/inline',
       },
       {
         test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-        use: 'file-loader',
+        use: 'asset/resource',
       },
     ],
   },
