@@ -9,6 +9,7 @@ export default {
     client: {
       overlay: false,
     },
+    hot: true,
   },
   module: {
     rules: [
@@ -22,18 +23,34 @@ export default {
           },
         },
       },
-      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'] },
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+        ],
+      },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
       },
       {
         test: /\.woff2?(\?v=\d\.\d\.\d)?$/,
-        use: 'asset/inline',
+        type: 'asset/inline',
       },
       {
-        test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-        use: 'asset/resource',
+        test: /\.(ttf|eot)(\?[\s\S]+)?$/,
+        type: 'asset/resource',
       },
     ],
   },
@@ -42,7 +59,7 @@ export default {
       template: 'index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: '[name].[contenthash].css',
     }),
   ],
   output: {
