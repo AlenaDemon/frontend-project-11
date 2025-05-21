@@ -40,12 +40,12 @@ export default () => {
     const formData = new FormData(e.target)
     const url = formData.get('url').trim()
     watchedState.form.status = 'processing'
-    console.log(e.target)
     validate(url, watchedState.form.collectionUrl)
       .then ((link) => {
         watchedState.form.errors = []
         watchedState.form.isValid = 'valid'
         watchedState.form.collectionUrl.push(link)
+        watchedState.form.status = 'success'
       })
       .catch ((error) => {
         watchedState.form.isValid = 'invalid'
