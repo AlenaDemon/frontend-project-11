@@ -1,5 +1,6 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import sass from 'sass'
 
 export default {
   mode: 'development',
@@ -38,6 +39,15 @@ export default {
           'css-loader',
           'sass-loader',
           'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              implementation: sass,
+              sassOptions: {
+                quietDeps: true,
+              },
+            },
+          },
         ],
       },
       {

@@ -7,11 +7,12 @@ import onChange from 'on-change'
 export default (elements, i18n, state) => {
   const { t } = i18n
   const watchedState = onChange(state, (path, value) => {
-    console.log(path, value)
     switch (path) {
       case 'form.isValid':
         if (value === 'valid') {
           elements.input.classList.remove('is-invalid')
+          elements.input.focus()
+          elements.input.value = ''
         }
         else {
           elements.input.classList.add('is-invalid')
@@ -23,10 +24,20 @@ export default (elements, i18n, state) => {
         elements.errorContainer.classList.remove('text-success')
         break
       case 'form.status':
+        if (value === 'processing') {
+          elements.button.setAttribute('disabled', 'true')
+          elements.input.setAttribute('disabled', 'true')
+        }
         if (value === 'success') {
           elements.errorContainer.textContent = t('success')
           elements.errorContainer.classList.add('text-success')
           elements.errorContainer.classList.remove('text-danger')
+          elements.button.removeAttribute('disabled')
+          elements.input.removeAttribute('disabled')
+        }
+        if (value === 'failed') {
+          elements.button.removeAttribute('disabled')
+          elements.input.removeAttribute('disabled')
         }
         break
       default:
