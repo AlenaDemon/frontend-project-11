@@ -1,6 +1,6 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import sass from 'sass'
+import * as sass from 'sass'
 
 export default {
   mode: 'development',

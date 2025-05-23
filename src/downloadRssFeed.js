@@ -8,8 +8,7 @@ export default link => axios.get(link, {
     return parserRss(response.data.contents)
   })
   .catch((error) => {
-    if (error.code === 'ECONNABORTED') {
-    // Ошибка таймаута
+    if (error.code === 'ECONNABORTED') { // Ошибка таймаута
       throw new Error('errors.networkError')
     }
     if (error.isAxiosError) {

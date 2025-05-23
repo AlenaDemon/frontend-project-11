@@ -7,5 +7,8 @@ export default {
       networkError: 'Ошибка сети',
     },
     success: 'RSS успешно загружен',
+    posts: 'Посты',
+    feeds: 'Фиды',
+    buttonPost: 'Просмотр',
   },
 }
