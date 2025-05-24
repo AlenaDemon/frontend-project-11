@@ -5,7 +5,7 @@ export default link => axios.get(link, {
   timeout: 10000,
 })
   .then((response) => {
-    return parserRss(response.data.contents)
+    return parserRss(response.data.contents, link)
   })
   .catch((error) => {
     if (error.code === 'ECONNABORTED') { // Ошибка таймаута

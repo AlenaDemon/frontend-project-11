@@ -66,31 +66,28 @@ export default (elements, i18n, state) => {
   }
 
   const postsItem = (posts, list) => {
-    posts.map((item) => {
-      item.map((post) => {
-        const li = document.createElement('li')
-        li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0')
-        const a = document.createElement('a')
-        a.setAttribute('href', `${post.link}`)
-        a.classList.add('fw-bold')
-        a.setAttribute('data-id', `${post.id}`)
-        a.setAttribute('target', '_blank')
-        a.setAttribute('rel', 'noopener noreferrer')
-        a.textContent = post.title
-        console.log(post)
-        li.append(a)
+    posts.map((post) => {
+      const li = document.createElement('li')
+      li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0')
+      const a = document.createElement('a')
+      a.setAttribute('href', `${post.link}`)
+      a.classList.add('fw-bold')
+      a.setAttribute('data-id', `${post.id}`)
+      a.setAttribute('target', '_blank')
+      a.setAttribute('rel', 'noopener noreferrer')
+      a.textContent = post.title
+      li.append(a)
 
-        const button = document.createElement('button')
-        button.classList.add('btn', 'btn-outline-primary', 'btn-sm')
-        button.setAttribute('type', 'button')
-        button.setAttribute('data-id', `${post.id}`)
-        button.setAttribute('data-bs-toggle', 'modal')
-        button.setAttribute('data-bs-target', '#modal')
-        button.textContent = i18n.t('buttonPost')
-        li.append(button)
+      const button = document.createElement('button')
+      button.classList.add('btn', 'btn-outline-primary', 'btn-sm')
+      button.setAttribute('type', 'button')
+      button.setAttribute('data-id', `${post.id}`)
+      button.setAttribute('data-bs-toggle', 'modal')
+      button.setAttribute('data-bs-target', '#modal')
+      button.textContent = i18n.t('buttonPost')
+      li.append(button)
 
-        list.append(li)
-      })
+      list.append(li)
     })
   }
 
@@ -99,8 +96,6 @@ export default (elements, i18n, state) => {
       case 'form.isValid':
         if (value === 'valid') {
           elements.input.classList.remove('is-invalid')
-          elements.input.focus()
-          elements.input.value = ''
         }
         else {
           elements.input.classList.add('is-invalid')
@@ -113,18 +108,20 @@ export default (elements, i18n, state) => {
         break
       case 'form.status':
         if (value === 'processing') {
-          elements.button.setAttribute('disabled', 'true')
+          elements.buttonAdd.setAttribute('disabled', 'true')
           elements.input.setAttribute('disabled', 'true')
         }
         if (value === 'success') {
           elements.errorContainer.textContent = t('success')
           elements.errorContainer.classList.add('text-success')
           elements.errorContainer.classList.remove('text-danger')
-          elements.button.removeAttribute('disabled')
+          elements.buttonAdd.removeAttribute('disabled')
           elements.input.removeAttribute('disabled')
+          elements.input.focus()
+          elements.input.value = ''
         }
         if (value === 'failed') {
-          elements.button.removeAttribute('disabled')
+          elements.buttonAdd.removeAttribute('disabled')
           elements.input.removeAttribute('disabled')
         }
         break
@@ -136,11 +133,24 @@ export default (elements, i18n, state) => {
       }
         break
       case 'posts':{
-        console.log(value)
         const { divCard, ul } = renderForPosts()
         elements.postsContainer.innerHTML = ''
         elements.postsContainer.append(divCard)
         postsItem(value, ul)
+      }
+        break
+      case 'postButtonWiew': {
+        elements.titleWiew.textContent = value.title
+        elements.bodyWiew.textContent = value.description
+        elements.buttonReadFull.setAttribute('href', `${value.link}`)
+        const a = document.querySelector(`a[data-id="${value.id}"]`)
+        a.classList.remove('fw-bold')
+        a.classList.add('fw-normal', 'link-secondary')
+      }
+        break
+      case 'aClick': {
+        value.classList.remove('fw-bold')
+        value.classList.add('fw-normal', 'link-secondary')
       }
         break
       default:

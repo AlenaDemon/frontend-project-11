@@ -5,6 +5,7 @@ export default {
       notUniqueRss: 'RSS уже существует',
       parserRss: 'Ресурс не содержит валидный RSS',
       networkError: 'Ошибка сети',
+      updateError: 'Ошибка при обновлении',
     },
     success: 'RSS успешно загружен',
     posts: 'Посты',
