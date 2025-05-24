@@ -26,7 +26,7 @@ jobs:
       - run: npm run build --if-present
 
       - name: Test & publish code coverage
-        uses: qltysh/qlty-action/coverage@main
+        uses: qltysh/qlty-action/coverage@v1
         with:
           token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
           files: coverage/lcov.info
