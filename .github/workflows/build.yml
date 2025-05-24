@@ -1,4 +1,4 @@
-name: Qlty
+name: Build
 
 on:
   push:
