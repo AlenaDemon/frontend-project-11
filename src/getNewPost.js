@@ -1,8 +1,8 @@
 import downloadRssFeed from './downloadRssFeed.js'
 
 export default (state) => {
-  const postsOld = state.posts
-  return Promise.all(state.feeds.map(feed => downloadRssFeed(feed.linkRss)
+  const postsOld = state.data.posts
+  return Promise.all(state.data.feeds.map(feed => downloadRssFeed(feed.linkRss)
     .then((data) => {
       const { postsData } = data
       const postsForCurrentFeed = postsOld.filter(({ feedId }) => feedId === feed.id)

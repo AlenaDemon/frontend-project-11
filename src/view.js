@@ -101,15 +101,19 @@ export default (elements, i18n, state) => {
           elements.input.classList.add('is-invalid')
         }
         break
-      case 'errors':
+      case 'form.errors':
         elements.errorContainer.textContent = t(value.key)
         elements.errorContainer.classList.add('text-danger')
         elements.errorContainer.classList.remove('text-success')
         break
-      case 'form.status':
+      case 'request.status': {
         if (value === 'processing') {
           elements.buttonAdd.setAttribute('disabled', 'true')
           elements.input.setAttribute('disabled', 'true')
+        }
+        if (value === 'filling') {
+          elements.buttonAdd.removeAttribute('disabled')
+          elements.input.removeAttribute('disabled')
         }
         if (value === 'success') {
           elements.errorContainer.textContent = t('success')
@@ -124,22 +128,23 @@ export default (elements, i18n, state) => {
           elements.buttonAdd.removeAttribute('disabled')
           elements.input.removeAttribute('disabled')
         }
+      }
         break
-      case 'feeds': {
+      case 'data.feeds': {
         const { divCard, ul } = renderForFeeds()
         elements.feedsContainer.innerHTML = ''
         elements.feedsContainer.append(divCard)
         feedsItem(value, ul)
       }
         break
-      case 'posts':{
+      case 'data.posts':{
         const { divCard, ul } = renderForPosts()
         elements.postsContainer.innerHTML = ''
         elements.postsContainer.append(divCard)
         postsItem(value, ul)
       }
         break
-      case 'postButtonWiew': {
+      case 'ui.postWiew': {
         elements.titleWiew.textContent = value.title
         elements.bodyWiew.textContent = value.description
         elements.buttonReadFull.setAttribute('href', `${value.link}`)
@@ -148,13 +153,10 @@ export default (elements, i18n, state) => {
         a.classList.add('fw-normal', 'link-secondary')
       }
         break
-      case 'aClick': {
-        value.classList.remove('fw-bold')
-        value.classList.add('fw-normal', 'link-secondary')
-      }
+      case 'data.collectionUrl':
         break
       default:
-        break
+        throw new Error(`Unknown value: ${value}`)
     }
   })
   return watchedState
