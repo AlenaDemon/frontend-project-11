@@ -9,4 +9,4 @@
 ## Description
 RSS is a specialized format designed for describing news feeds, article announcements, and other content. It is the simplest way for websites (typically blogs) to allow users to subscribe to updates. This is done using special services called RSS aggregators. These services can regularly check RSS feeds for new posts and display them in a convenient way, marking read items and so on.
 
-https://frontend-project-11-nx0giq996-alenademons-projects.vercel.app/
+[https://frontend-project-11-nx0giq996-alenademons-projects.vercel.app/](https://frontend-project-11-2chc4or4b-alenademons-projects.vercel.app)
